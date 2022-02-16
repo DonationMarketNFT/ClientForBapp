@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { data } from "../../api/allpastdata";
 
 const Wrapper = styled.div`
   margin: 100px 0;
@@ -27,10 +28,9 @@ function Past() {
       <PastTitle>완료된 캠페인</PastTitle>
       <FlexBox>
         {/* 실제 데이터 map 함수 */}
-        <Box />
-        <Box />
-        <Box />
-        <Box />
+        {data.map((a, i) => (
+          <Box />
+        ))}
       </FlexBox>
     </Wrapper>
   );

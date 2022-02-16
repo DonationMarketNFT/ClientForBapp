@@ -8,7 +8,7 @@ import {
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import NewModal from "../Modal/NewModal";
-import { data } from "../../populardata";
+import { data } from "../../api/populardata";
 import { makePopularImagePath } from "../../utils";
 
 const Wrapper = styled.div`

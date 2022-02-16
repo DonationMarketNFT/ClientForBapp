@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocation, useParams } from "react-router";
 import styled from "styled-components";
-import { data } from "../../newdata";
+import { data } from "../../api/allpresentdata";
 import { media } from "../../styles/theme";
 
 const CampaignBox1 = styled.div`
@@ -114,6 +114,10 @@ const Participant = styled.div`
   height: 70px;
   background: black;
   border-radius: 50%;
+  ${media.tablet} {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const DescriptionBox = styled.div`
@@ -138,6 +142,9 @@ const CampaignName = styled.h2`
   ${(props) => props.theme.font.large}
   text-align:center;
   margin-bottom: 30px;
+  ${media.tablet} {
+    ${(props) => props.theme.font.medium}
+  }
 `;
 
 const CampaignDesc = styled.p`

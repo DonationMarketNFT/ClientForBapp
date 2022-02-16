@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { data } from "../../api/allpresentdata";
+import { makeNewImagePath } from "../../utils";
 
 const Wrapper = styled.div`
   margin: 100px 0;
@@ -14,11 +17,23 @@ const FlexBox = styled.div`
   justify-content: space-between;
 `;
 
+const BoxContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  a {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+`;
+
 const Box = styled.div`
   width: 180px;
   height: 150px;
   margin: 10px 0;
   background: black;
+  background-image: url(${(props) => props.bgphoto});
+  background-size: cover;
+  background-position: center center;
 `;
 
 function Present() {
@@ -26,19 +41,15 @@ function Present() {
     <Wrapper>
       <PresentTitle>진행 중인 캠페인</PresentTitle>
       <FlexBox>
-        {/* 실제 데이터 map 함수 */}
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
+        {data.map((o, i) => (
+          <>
+            <BoxContainer key={i}>
+              <Link to={`/campaign/${o.id}`}>
+                <Box bgphoto={makeNewImagePath(o.id)} />
+              </Link>
+            </BoxContainer>
+          </>
+        ))}
       </FlexBox>
     </Wrapper>
   );

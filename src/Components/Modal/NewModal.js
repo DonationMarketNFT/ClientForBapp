@@ -2,7 +2,8 @@ import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { data } from "../../newdata";
+import { data } from "../../api/newdata";
+import { media } from "../../styles/theme";
 import { makeNewImagePath } from "../../utils";
 
 const Overlay = styled(motion.div)`
@@ -19,8 +20,8 @@ const Overlay = styled(motion.div)`
 
 const ModalContainer = styled(motion.div)`
   position: absolute;
-  width: 40vw;
-  height: 50vh;
+  width: 30vw;
+  height: 80vh;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -28,6 +29,9 @@ const ModalContainer = styled(motion.div)`
   overflow: hidden;
   background: lightgray;
   z-index: 999;
+  ${media.tablet} {
+    width: 50vw;
+  }
 `;
 
 const ModalCover = styled.div`
@@ -35,7 +39,7 @@ const ModalCover = styled.div`
   background-size: cover;
   background-position: center center;
   background-image: url(${(props) => props.bgphoto});
-  height: 200px;
+  height: 300px;
 `;
 
 const ModalTitle = styled.h3`
@@ -75,7 +79,7 @@ function NewModal() {
             exit={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           />
-          <ModalContainer style={{ top: scrollY.get() + 200 }}>
+          <ModalContainer style={{ top: scrollY.get() + 50 }}>
             <ModalCover
               bgphoto={makeNewImagePath(data[params.dataId - 1].id)}
             />
