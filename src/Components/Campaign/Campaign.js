@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useLocation, useParams } from "react-router";
 import styled from "styled-components";
 import { data } from "../../api/allpresentdata";

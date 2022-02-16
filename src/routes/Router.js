@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../Components/Home/Home";
 import Campaigns from "../Components/Campaigns/Campaigns";
-import SubPage from "../Components/SubPage";
 import Header from "./Header";
 import Past from "../Components/Campaigns/Past";
 import Present from "../Components/Campaigns/Present";
