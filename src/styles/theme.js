@@ -28,12 +28,31 @@ const flexCenter = css`
   align-items: center;
 `;
 
+const BoxShadow1 = css`
+  box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+`;
+
+const BoxShadow2 = css`
+  box-shadow: 4px 12px 20px 6px rgb(0 0 0 / 18%);
+`;
+
 export const theme = {
   color: {
-    main_color: "#333",
-    sub_color1: "#fcc",
+    textColor: "#333",
+    accentColor: "#fbc531",
     bg_color: "#fff",
   },
   font,
   flexCenter,
+  BoxShadow1,
+  BoxShadow2,
+};
+
+const customMediaQuery = (maxWidth) => `@media (max-width: ${maxWidth}px)`;
+
+export const media = {
+  custom: customMediaQuery,
+  768: customMediaQuery(768),
+  tablet: customMediaQuery(1024),
+  mobile: customMediaQuery(480),
 };
