@@ -10,6 +10,7 @@ import {
 import NewModal from "../Modal/NewModal";
 import { data } from "../../newdata";
 import { makeNewImagePath } from "../../utils";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 935px;
@@ -91,6 +92,7 @@ function NewSlider() {
   const [leaving, setLeaving] = useState(false);
   const [back, setBack] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
 
   const decreaseIndex = () => {
     if (leaving) return;
@@ -113,6 +115,9 @@ function NewSlider() {
   };
 
   const toggleLeaving = () => setLeaving((prev) => !prev);
+  const onBoxClicked = (dataId) => {
+    navigate(`/modal/${dataId}`);
+  };
 
   return (
     <Wrapper>
@@ -141,7 +146,7 @@ function NewSlider() {
                 <Box
                   key={data.id}
                   bgphoto={makeNewImagePath(data.id)}
-                  onClick={() => setModalShow(true)}
+                  onClick={() => onBoxClicked(data.id)}
                 ></Box>
               </>
             ))}
@@ -151,7 +156,6 @@ function NewSlider() {
           <FontAwesomeIcon icon={faChevronRight} size="2x" />
         </Next>
       </Slider>
-      <NewModal show={modalShow} onHide={() => setModalShow(false)} />
     </Wrapper>
   );
 }
