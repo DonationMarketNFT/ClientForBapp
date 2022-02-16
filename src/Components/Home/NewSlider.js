@@ -8,6 +8,8 @@ import {
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import NewModal from "../Modal/NewModal";
+import { data } from "../../newdata";
+import { makeNewImagePath } from "../../utils";
 
 const Wrapper = styled.div`
   width: 935px;
@@ -40,7 +42,9 @@ const Row = styled(motion.div)`
 `;
 
 const Box = styled(motion.div)`
-  background-color: black;
+  background-image: url(${(props) => props.bgphoto});
+  background-position: center center;
+  background-size: cover;
   height: 120px;
 `;
 
@@ -92,7 +96,7 @@ function NewSlider() {
     if (leaving) return;
     setBack(true);
     toggleLeaving();
-    const totalData = 8; //임시 (데이터length 이용)
+    const totalData = data.length; //임시 (데이터length 이용)
     const maxIndex = Math.floor(totalData / offset) - 1;
     // 현재 인덱스가 첫번째 인덱스일 경우엔 마지막 인덱스로 넘김
     setIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
@@ -102,7 +106,7 @@ function NewSlider() {
     if (leaving) return;
     setBack(false);
     toggleLeaving();
-    const totalData = 8; //임시
+    const totalData = data.length; //임시
     const maxIndex = Math.floor(totalData / offset) - 1;
     // 현재 인덱스가 마지막 인덱스일 경우엔 첫번째 인덱스로 넘김
     setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
@@ -131,18 +135,22 @@ function NewSlider() {
             transition={{ type: "tween", duration: 1 }}
             key={index}
           >
-            {/* map 함수를 이용하여 API data를 Box로 만들기 flat,slice */}
-            <Box onClick={() => setModalShow(true)}></Box>
-            <Box onClick={() => setModalShow(true)}></Box>
-            <Box onClick={() => setModalShow(true)}></Box>
-            <Box onClick={() => setModalShow(true)}></Box>
+            {/* slice 조건문 수정필요? */}
+            {data.slice(offset * index, offset * index + offset).map((data) => (
+              <>
+                <Box
+                  key={data.id}
+                  bgphoto={makeNewImagePath(data.id)}
+                  onClick={() => setModalShow(true)}
+                ></Box>
+              </>
+            ))}
           </Row>
         </AnimatePresence>
         <Next whileHover={{ opacity: 1 }} onClick={increaseIndex}>
           <FontAwesomeIcon icon={faChevronRight} size="2x" />
         </Next>
       </Slider>
-
       <NewModal show={modalShow} onHide={() => setModalShow(false)} />
     </Wrapper>
   );

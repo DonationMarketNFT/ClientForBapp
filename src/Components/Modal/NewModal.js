@@ -10,8 +10,10 @@ const ModalImage = styled.img`
 `;
 
 function NewModal(props) {
+  console.log(props);
   return (
     <Modal
+      state={props.state}
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -19,7 +21,7 @@ function NewModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Campaign Name
+          {props.state}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

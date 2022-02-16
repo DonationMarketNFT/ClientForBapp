@@ -15,6 +15,7 @@ function Router() {
         <Route path="/campaigns/*" element={<Campaigns />}>
           <Route path="present" element={<Present />} />
           <Route path="past" element={<Past />} />
+          {/* <Route path=":id" element={<SubPage />} /> */}
         </Route>
         {/* <Route path="/sub" element={<SubPage />} /> */}
       </Routes>
