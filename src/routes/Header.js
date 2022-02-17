@@ -1,6 +1,8 @@
+import QRCode from "qrcode.react";
 import { motion, useAnimation, useViewportScroll } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { media } from "../styles/theme";
 
@@ -79,6 +81,7 @@ const headVariants = {
     backgroundColor: "rgba(255, 255, 255, 1)",
   },
 };
+const DEFAULT_QR_CODE = "DEFAULT";
 
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -86,6 +89,9 @@ function Header() {
   const inputAnimation = useAnimation();
   const headAnimation = useAnimation();
   const { scrollY } = useViewportScroll();
+  const navigate = useNavigate();
+  const [showQR, setShowQR] = useState(false);
+  const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
 
   useEffect(() => {
     scrollY.onChange(() => {
@@ -102,11 +108,16 @@ function Header() {
       inputAnimation.start({
         scaleX: 0,
       });
+      if (scrollY.get() == 0) headAnimation.start("top");
     } else {
       inputAnimation.start({ scaleX: 1 });
+      headAnimation.start("scroll");
     }
     setSearchOpen((prev) => !prev);
   };
+
+  const handleQRClose = () => setShowQR(false);
+  const handleQRShow = () => setShowQR(true);
 
   return (
     <Head variants={headVariants} animate={headAnimation} initial={"top"}>
@@ -141,11 +152,28 @@ function Header() {
           </SearchForm>
           {isLogined ? (
             <>
-              <MyBalance>10 Klay</MyBalance>
-              <Mypage>Mypage</Mypage>
+              <MyBalance>523 Klay</MyBalance>
+              <Link to="/mypage">
+                <Mypage>Mypage</Mypage>
+              </Link>
             </>
           ) : (
-            <ConnectWallet>Connect Wallet</ConnectWallet>
+            <>
+              <ConnectWallet onClick={handleQRShow}>
+                Connect Wallet
+              </ConnectWallet>
+              <Modal show={showQR} onHide={handleQRClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Kakao Klip 연동하기</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ margin: "30px auto" }}>
+                  <QRCode value={qrvalue} size={256} />
+                </Modal.Body>
+                <button onClick={() => setIsLogined(true)}>
+                  임시 로그인 버튼
+                </button>
+              </Modal>
+            </>
           )}
         </Col>
       </Container>

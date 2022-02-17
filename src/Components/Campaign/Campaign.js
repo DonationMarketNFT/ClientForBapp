@@ -2,6 +2,7 @@ import { useLocation, useParams } from "react-router";
 import styled from "styled-components";
 import { data } from "../../api/allpresentdata";
 import { media } from "../../styles/theme";
+import { makeNewImagePath } from "../../utils";
 
 const CampaignBox1 = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const CampaignBox1 = styled.div`
 
 const CampaignImage = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
-    url("img/0.jpg");
+    url(${(props) => props.bgphoto});
   background-position: center center;
   background-size: cover;
   width: 100%;
@@ -151,6 +152,25 @@ const CampaignDesc = styled.p`
   height: 150px;
 `;
 
+const DonationForm = styled.form`
+  position: relative;
+  label {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+  }
+`;
+
+const DonationInput = styled.input.attrs({ required: true })`
+  all: unset;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 0 40px 5px 0;
+  text-align: right;
+`;
+
 const DonationButton = styled.button`
   width: 100%;
   padding: 10px 0;
@@ -170,7 +190,7 @@ function Campaign() {
   return (
     <>
       <CampaignBox1>
-        <CampaignImage />
+        <CampaignImage bgphoto={makeNewImagePath(data[params.camId - 1].id)} />
         <CamPaignTitle>{data[params.camId - 1].name}</CamPaignTitle>
         <Bars>
           <PercentBar />
@@ -200,7 +220,11 @@ function Campaign() {
           <DonationBox>
             <CampaignName>{data[params.camId - 1].name}</CampaignName>
             <CampaignDesc>{data[params.camId - 1].description}</CampaignDesc>
-            <DonationButton>Donate</DonationButton>
+            <DonationForm>
+              <DonationInput type="number" id="klay" step={10} />
+              <label htmlFor="klay">Klay</label>
+              <DonationButton>Donate</DonationButton>
+            </DonationForm>
           </DonationBox>
         </CampaignRow>
       </CampaignBox>

@@ -6,6 +6,8 @@ import Past from "../Components/Campaigns/Past";
 import Present from "../Components/Campaigns/Present";
 import NewModal from "../Components/Modal/NewModal";
 import Campaign from "../Components/Campaign/Campaign";
+import Connection from "../Components/Nav/Connection";
+import Mypage from "../Components/Nav/Mypage";
 
 function Router() {
   return (
@@ -14,11 +16,12 @@ function Router() {
       <Routes>
         <Route exact path="/" element={<Home />}>
           <Route path="modal/:dataId" element={<NewModal />} />
+          <Route path="connection" element={<Connection />} />
         </Route>
+        <Route path="/mypage" element={<Mypage />} />
         <Route path="/campaigns/*" element={<Campaigns />}>
           <Route path="present" element={<Present />} />
           <Route path="past" element={<Past />} />
-          {/* <Route path=":id" element={<SubPage />} /> */}
         </Route>
         <Route path="/campaign/:camId" element={<Campaign />} />
       </Routes>
