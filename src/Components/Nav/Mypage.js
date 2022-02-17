@@ -73,19 +73,19 @@ const NFTContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px 15px;
-  background: lightgray;
   width: 935px;
   padding: 30px;
   margin: 0 auto;
   margin-bottom: 200px;
-  border-radius: 20px;
   h3 {
     position: absolute;
-    top: -30px;
     left: 30px;
   }
   ${media.tablet} {
     width: auto;
+  }
+  ${media.mobile} {
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
@@ -95,8 +95,11 @@ const NFTBox = styled(motion.div)`
   background-position: center center;
   height: 200px;
   border-radius: 10px;
+  ${media.tablet} {
+    height: 150px;
+  }
   ${media[768]} {
-    height: 100px;
+    height: 130px;
   }
 `;
 

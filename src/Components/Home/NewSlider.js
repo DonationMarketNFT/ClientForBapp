@@ -18,6 +18,9 @@ const Wrapper = styled.div`
   ${media.tablet} {
     width: auto;
   }
+  ${media.mobile} {
+    padding: 30px 10px;
+  }
 `;
 
 const Slider = styled.div`
@@ -38,6 +41,12 @@ const Row = styled(motion.div)`
   padding: 0 60px;
   ${media.tablet} {
     padding: 0 50px;
+  }
+  ${media.mobile} {
+    overflow-x: scroll;
+    // 하드코딩 해결
+    grid-template-columns: repeat(9, 150px);
+    padding: 0 10px;
   }
 `;
 
@@ -92,6 +101,7 @@ function NewSlider() {
   const [back, setBack] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
+  const ismobile = window.screen.width >= 480 ? false : true;
 
   const decreaseIndex = () => {
     if (leaving) return;
@@ -115,46 +125,61 @@ function NewSlider() {
 
   const toggleLeaving = () => setLeaving((prev) => !prev);
   const onBoxClicked = (dataId) => {
-    navigate(`/modal/${dataId}`);
+    navigate(`/campaign/${dataId}`);
   };
 
   return (
     <Wrapper>
-      <Slider>
-        <SliderTitle>New Campaign</SliderTitle>
-        <Prev whileHover={{ opacity: 1 }} onClick={decreaseIndex}>
-          <FontAwesomeIcon icon={faChevronLeft} size="2x" />
-        </Prev>
-        <AnimatePresence
-          custom={back}
-          initial={false}
-          onExitComplete={toggleLeaving}
-        >
-          <Row
-            custom={back}
-            variants={rowVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            transition={{ type: "tween", duration: 1 }}
-            key={index}
-          >
-            {/* slice 조건문 수정필요? */}
-            {data.slice(offset * index, offset * index + offset).map((data) => (
-              <>
-                <Box
-                  key={data.id}
-                  bgphoto={makeNewImagePath(data.id)}
-                  onClick={() => onBoxClicked(data.id)}
-                ></Box>
-              </>
+      {ismobile ? (
+        <Slider>
+          <SliderTitle>New Campaign</SliderTitle>
+          <Row>
+            {data.slice(0, data.length).map((data) => (
+              <Box
+                key={data.id}
+                bgphoto={makeNewImagePath(data.id)}
+                onClick={() => onBoxClicked(data.id)}
+              ></Box>
             ))}
           </Row>
-        </AnimatePresence>
-        <Next whileHover={{ opacity: 1 }} onClick={increaseIndex}>
-          <FontAwesomeIcon icon={faChevronRight} size="2x" />
-        </Next>
-      </Slider>
+        </Slider>
+      ) : (
+        <Slider>
+          <SliderTitle>New Campaign</SliderTitle>
+          <Prev whileHover={{ opacity: 1 }} onClick={decreaseIndex}>
+            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+          </Prev>
+          <AnimatePresence
+            custom={back}
+            initial={false}
+            onExitComplete={toggleLeaving}
+          >
+            <Row
+              custom={back}
+              variants={rowVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ type: "tween", duration: 1 }}
+              key={index}
+            >
+              {/* slice 조건문 수정필요? */}
+              {data
+                .slice(offset * index, offset * index + offset)
+                .map((data) => (
+                  <Box
+                    key={data.id}
+                    bgphoto={makeNewImagePath(data.id)}
+                    onClick={() => onBoxClicked(data.id)}
+                  ></Box>
+                ))}
+            </Row>
+          </AnimatePresence>
+          <Next whileHover={{ opacity: 1 }} onClick={increaseIndex}>
+            <FontAwesomeIcon icon={faChevronRight} size="2x" />
+          </Next>
+        </Slider>
+      )}
     </Wrapper>
   );
 }

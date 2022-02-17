@@ -85,18 +85,39 @@ const CampaignBox = styled.div`
     margin: 0 30px;
     padding: 0 30px;
   }
+  ${media.mobile} {
+    padding: 0 10px;
+  }
 `;
 
 const CampaignRow = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => props.width};
+  &:first-child {
+    width: 70%;
+  }
+  &:last-child {
+    width: 30%;
+  }
+  ${media.mobile} {
+    &:first-child {
+      width: 100%;
+    }
+    &:last-child {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+  }
 `;
 
 const ParticipantBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 50px 30px;
+  ${media.mobile} {
+    padding: 20px 10px;
+  }
 `;
 
 const ParticipantRow = styled.div`
@@ -122,7 +143,10 @@ const Participant = styled.div`
 
 const DescriptionBox = styled.div`
   padding: 50px 30px;
-  height: 100vh;
+  height: 90vh;
+  ${media.mobile} {
+    padding: 20px 10px;
+  }
 `;
 const DescriptionTitle = styled.h3`
   margin: 10px 0;
@@ -136,6 +160,18 @@ const DonationBox = styled.div`
   background: white;
   border-radius: 15px;
   box-shadow: 4px 12px 20px 6px rgb(0 0 0 / 18%);
+  ${media.tablet} {
+    all: unset;
+    background: white;
+    width: 70%;
+    padding: 30px 15px 30px 15px;
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 `;
 
 const CampaignName = styled.h2`
@@ -144,12 +180,17 @@ const CampaignName = styled.h2`
   margin-bottom: 30px;
   ${media.tablet} {
     ${(props) => props.theme.font.medium}
+    display: none;
   }
 `;
 
 const CampaignDesc = styled.p`
   margin-bottom: 30px;
   height: 150px;
+  ${media.tablet} {
+    display: none;
+    height: 70px;
+  }
 `;
 
 const DonationForm = styled.form`
@@ -158,6 +199,18 @@ const DonationForm = styled.form`
     position: absolute;
     top: 2px;
     right: 5px;
+  }
+  ${media.tablet} {
+    label {
+      top: 6px;
+      font-size: 24px;
+    }
+  }
+  ${media.mobile} {
+    label {
+      top: 4px;
+      font-size: 30px;
+    }
   }
 `;
 
@@ -169,6 +222,10 @@ const DonationInput = styled.input.attrs({ required: true })`
   margin-bottom: 10px;
   padding: 0 40px 5px 0;
   text-align: right;
+  ${media.tablet} {
+    font-size: 30px;
+    padding: 0 70px 5px 0;
+  }
 `;
 
 const DonationButton = styled.button`
@@ -180,7 +237,10 @@ const DonationButton = styled.button`
   &:hover {
     background: gray;
   }
-  /* all: unset; */
+  ${media.tablet} {
+    padding: 25px 0;
+    font-size: 30px;
+  }
 `;
 
 function Campaign() {
@@ -200,7 +260,7 @@ function Campaign() {
         </Bars>
       </CampaignBox1>
       <CampaignBox>
-        <CampaignRow width={"70%"}>
+        <CampaignRow>
           <ParticipantBox>
             <ParticipantRow>
               <ParticipantTitle>participant</ParticipantTitle>
@@ -216,7 +276,7 @@ function Campaign() {
             <DescriptionTitle>Description</DescriptionTitle>
           </DescriptionBox>
         </CampaignRow>
-        <CampaignRow width={"30%"} style={{ padding: "50px 0" }}>
+        <CampaignRow style={{ padding: "50px 0" }}>
           <DonationBox>
             <CampaignName>{data[params.camId - 1].name}</CampaignName>
             <CampaignDesc>{data[params.camId - 1].description}</CampaignDesc>

@@ -12,6 +12,8 @@ import PopularSlider from "./PopularSlider";
 function Banner() {
   const [index, setIndex] = useState(0);
   const imgs = [img1, img2, img3];
+  const ismobile = window.screen.width >= 480 ? false : true;
+
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
