@@ -133,7 +133,7 @@ function PopularSlider() {
     <Wrapper>
       {ismobile ? (
         <Slider>
-          <SliderTitle>New Campaign</SliderTitle>
+          <SliderTitle>Popular Campaign</SliderTitle>
           <Row>
             {data.slice(0, data.length).map((data) => (
               <Box
