@@ -18,7 +18,10 @@ const ProfileContainer = styled.div`
     width: auto;
     padding: 170px 0 130px 0;
   }
-  ${media[768]} {
+  ${media.mobile} {
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0 50px 0;
   }
 `;
 
@@ -35,11 +38,18 @@ const ProfileImage = styled.div`
     width: 220px;
     height: 220px;
   }
+  ${media.mobile} {
+    width: 220px;
+    height: 220px;
+  }
 `;
 
 const ProfileInfoBox = styled.div`
   margin: 10px;
   margin-bottom: 20px;
+  ${media.mobile} {
+    width: 80%;
+  }
 `;
 
 const ProfileInfo = styled.div`
@@ -86,6 +96,7 @@ const NFTContainer = styled.div`
   }
   ${media.mobile} {
     grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 100px;
   }
 `;
 

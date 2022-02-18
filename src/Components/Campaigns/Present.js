@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { data } from "../../api/allpresentdata";
+import { media } from "../../styles/theme";
 import { makeNewImagePath } from "../../utils";
 
 const Wrapper = styled.div`
@@ -34,6 +35,9 @@ const Box = styled.div`
   background-image: url(${(props) => props.bgphoto});
   background-size: cover;
   background-position: center center;
+  ${media.mobile} {
+    width: 160px;
+  }
 `;
 
 function Present() {

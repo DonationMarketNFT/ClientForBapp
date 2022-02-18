@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { data } from "../../api/allpastdata";
+import { media } from "../../styles/theme";
 
 const Wrapper = styled.div`
   margin: 100px 0;
@@ -20,6 +21,9 @@ const Box = styled.div`
   height: 150px;
   margin: 10px 0;
   background: black;
+  ${media.mobile} {
+    width: 160px;
+  }
 `;
 
 function Past() {
