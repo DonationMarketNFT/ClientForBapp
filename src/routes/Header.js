@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { media } from "../styles/theme";
+import { BrowserView } from "react-device-detect";
 
 const Head = styled(motion.header)`
   position: fixed;
@@ -127,55 +128,57 @@ function Header() {
             <Logo>Logo</Logo>
           </Link>
         </Col>
-        <Col>
-          <SearchForm>
-            <motion.svg
-              onClick={toggleSearch}
-              animate={{ x: searchOpen ? -185 : 0 }}
-              transition={{ type: "linear" }}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clipRule="evenodd"
-              ></path>
-            </motion.svg>
-            <SearchInput
-              animate={inputAnimation}
-              initial={{ scaleX: 0 }}
-              transition={{ type: "linear" }}
-              placeholder="Search for Campaign..."
-            />
-          </SearchForm>
-          {isLogined ? (
-            <>
-              <MyBalance>523 Klay</MyBalance>
-              <Link to="/mypage">
-                <Mypage>Mypage</Mypage>
-              </Link>
-            </>
-          ) : (
-            <>
-              <ConnectWallet onClick={handleQRShow}>
-                Connect Wallet
-              </ConnectWallet>
-              <Modal show={showQR} onHide={handleQRClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Kakao Klip 연동하기</Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ margin: "30px auto" }}>
-                  <QRCode value={qrvalue} size={256} />
-                </Modal.Body>
-                <button onClick={() => setIsLogined(true)}>
-                  임시 로그인 버튼
-                </button>
-              </Modal>
-            </>
-          )}
-        </Col>
+        <BrowserView>
+          <Col>
+            <SearchForm>
+              <motion.svg
+                onClick={toggleSearch}
+                animate={{ x: searchOpen ? -185 : 0 }}
+                transition={{ type: "linear" }}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clipRule="evenodd"
+                ></path>
+              </motion.svg>
+              <SearchInput
+                animate={inputAnimation}
+                initial={{ scaleX: 0 }}
+                transition={{ type: "linear" }}
+                placeholder="Search for Campaign..."
+              />
+            </SearchForm>
+            {isLogined ? (
+              <>
+                <MyBalance>523 Klay</MyBalance>
+                <Link to="/mypage">
+                  <Mypage>Mypage</Mypage>
+                </Link>
+              </>
+            ) : (
+              <>
+                <ConnectWallet onClick={handleQRShow}>
+                  Connect Wallet
+                </ConnectWallet>
+                <Modal show={showQR} onHide={handleQRClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Kakao Klip 연동하기</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body style={{ margin: "30px auto" }}>
+                    <QRCode value={qrvalue} size={256} />
+                  </Modal.Body>
+                  <button onClick={() => setIsLogined(true)}>
+                    임시 로그인 버튼
+                  </button>
+                </Modal>
+              </>
+            )}
+          </Col>
+        </BrowserView>
       </Container>
     </Head>
   );

@@ -11,6 +11,7 @@ import NewModal from "../Modal/NewModal";
 import { data } from "../../api/populardata";
 import { makePopularImagePath } from "../../utils";
 import { useNavigate } from "react-router";
+import { isMobile } from "react-device-detect";
 
 const Wrapper = styled.div`
   width: 935px;

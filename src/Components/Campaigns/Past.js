@@ -13,7 +13,7 @@ const PastTitle = styled.h3`
 const FlexBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const Box = styled.div`

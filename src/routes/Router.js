@@ -8,6 +8,7 @@ import NewModal from "../Components/Modal/NewModal";
 import Campaign from "../Components/Campaign/Campaign";
 import Connection from "../Components/Nav/Connection";
 import Mypage from "../Components/Nav/Mypage";
+import BottomTab from "./BottomTab";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
         </Route>
         <Route path="/campaign/:camId" element={<Campaign />} />
       </Routes>
+      <BottomTab />
     </BrowserRouter>
   );
 }
